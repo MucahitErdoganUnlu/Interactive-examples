@@ -75,6 +75,18 @@ private:
     std::vector<int> row_3;
 };
 
+struct Base {
+    virtual void printLine(){
+        std::cout << "In Base::printLine" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    virtual void printLine() {
+        std::cout << "In Derived::printLine" << std::endl;
+    }
+};
+
 
 int main(){
     try
@@ -116,5 +128,19 @@ int main(){
     catch(std::exception& e) {
         std::cout << e.what() << std::endl;
     }
+   
+    std::cout << "---Virtual Override---" << std::endl;
+    Base *p1 = new Base();
+    Base *p2 = new Derived();
+
+    p1->printLine();
+    p2->printLine();
+    std::cout << "---Pointers are over---" << std::endl;
+
+    Base p3 = Base();
+    Base p4 = Derived();
+
+    p3.printLine();
+    p4.printLine(); // I don't get why we cannot use without pointers
 }
 
